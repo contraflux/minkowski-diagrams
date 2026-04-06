@@ -21,7 +21,7 @@ import { pixelsToCoords, log, coordsToPixels, } from './utilities.js';
  * @param {string} color - The color of the grid
  * @param {float} width - The width of the grid lines
  */
-export function drawGrid(gridContainer, v1, v2, color, width) {
+export function drawGrid(gridContainer, v1, v2, v1label, v2label, color, width) {
     const ctx = gridContainer.ctx;
     const lowerLeftBound = pixelsToCoords(0, canvas.height);
     const upperRightBound = pixelsToCoords(canvas.width, 0);
@@ -71,7 +71,7 @@ export function drawGrid(gridContainer, v1, v2, color, width) {
 
             if (x == 0) {
                 if (first_y && y.toFixed(0) > 0) {
-                    ctx.fillText("t = " + y.toFixed(0), 5, 20);
+                    ctx.fillText(v1label + " = " + y.toFixed(0), 5, 20);
                     first_y = false;
                 } else {
                     ctx.fillText(y.toFixed(0), 5, 20);
@@ -81,7 +81,7 @@ export function drawGrid(gridContainer, v1, v2, color, width) {
                 ctx.fill();
             } else if (y == 0) {
                 if (first_x && x.toFixed(0) > 0) {
-                    ctx.fillText("x = " + x.toFixed(0), 5, 20);
+                    ctx.fillText(v2label + " = " + x.toFixed(0), 5, 20);
                     first_x = false;
                 } else {
                     ctx.fillText(x.toFixed(0), 5, 20);
