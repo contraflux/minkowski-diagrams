@@ -51,6 +51,9 @@ export function drawGrid(gridContainer, v1, v2, color, width) {
     const xs = [w1.x, w2.x, w3.x, w4.x];
     const ys = [w1.y, w2.y, w3.y, w4.y];
 
+    let first_y = true;
+    let first_x = true;
+
     for (let x = Math.floor(Math.min(...xs) / gridSpacing) * gridSpacing; x <= Math.max(...xs); x += gridSpacing) {
         for (let y = Math.floor(Math.min(...ys) / gridSpacing) * gridSpacing; y <= Math.max(...ys); y += gridSpacing) {
             const position = M.multiply(new Vector(x, y));
@@ -67,12 +70,22 @@ export function drawGrid(gridContainer, v1, v2, color, width) {
             ctx.stroke();
 
             if (x == 0) {
-                ctx.fillText(y.toFixed(0), 5, 20);
+                if (first_y && y.toFixed(0) > 0) {
+                    ctx.fillText("t = " + y.toFixed(0), 5, 20);
+                    first_y = false;
+                } else {
+                    ctx.fillText(y.toFixed(0), 5, 20);
+                }
                 ctx.beginPath();
                 ctx.arc(0, 0, 3, 0, Math.PI * 2)
                 ctx.fill();
             } else if (y == 0) {
-                ctx.fillText(x.toFixed(0), 5, 20);
+                if (first_x && x.toFixed(0) > 0) {
+                    ctx.fillText("x = " + x.toFixed(0), 5, 20);
+                    first_x = false;
+                } else {
+                    ctx.fillText(x.toFixed(0), 5, 20);
+                }
                 ctx.beginPath();
                 ctx.arc(0, 0, 3, 0, Math.PI * 2)
                 ctx.fill();
